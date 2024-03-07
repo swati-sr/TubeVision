@@ -42,6 +42,13 @@ const Header = () => {
     );
   };
 
+  const handleInputChange = (e) => {
+    setSearch(e.target.value);
+    if (e.target.value !== "") {
+      setShowSearchText(true);
+    }
+  };
+
   return (
     <div className="flex py-2 shadow-lg justify-between px-2">
       <div className="flex">
@@ -67,9 +74,9 @@ const Header = () => {
             type="text"
             name="Search"
             className="border rounded-l-full w-96 px-4 py-2"
-            onBlur={() => setShowSearchText(false)}
             onFocus={() => setShowSearchText(true)}
-            onChange={(e) => setSearch(e.target.value)}
+            onBlur={() => setShowSearchText(false)}
+            onChange={(e) => handleInputChange(e)}
             value={search}
             placeholder="Search"
           />
