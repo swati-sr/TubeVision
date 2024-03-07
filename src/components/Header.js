@@ -1,11 +1,45 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { openSideMenu } from "../utils/sideMenuSlice";
+import { SEARCH_LIST_YOUTUBE_API } from "../utils/constants";
+import { cachedResults } from "../utils/searchSlice";
 
 const Header = () => {
+  const [search, setSearch] = useState("");
+  const [showSearchText, setShowSearchText] = useState(false);
+  const [itemList, setItemList] = useState([]);
   const dispatch = useDispatch();
   const toggleMenuHandler = () => {
     dispatch(openSideMenu());
+  };
+  const listItemFromStore = useSelector((store) => store.searching);
+
+  useEffect(() => {
+    //debouncing technique for enhancing performance
+    const timer = setTimeout(() => {
+      //searching if searched item is present in the store or not
+      if (listItemFromStore[search]) {
+        setItemList([listItemFromStore[search]]);
+      } else {
+        getItemFromSearch();
+      }
+    }, 200);
+
+    //componentWillUnmounting - cleanup
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [search]);
+
+  const getItemFromSearch = async () => {
+    const data = await fetch(SEARCH_LIST_YOUTUBE_API + search);
+    const json = await data.json();
+    setItemList(json[1]);
+    dispatch(
+      cachedResults({
+        [search]: json[1],
+      })
+    );
   };
 
   return (
@@ -27,18 +61,40 @@ const Header = () => {
           />
         </a>
       </div>
-      <div className="flex my-3">
-        <input
-          type="text"
-          name="Search"
-          className="border rounded-l-full w-96"
-        />
-        <button className="border px-6 bg-gray-50 rounded-r-full">
-          &#x1F50E;&#xFE0E;
-        </button>
+      <div className="mt-3">
+        <div className="flex">
+          <input
+            type="text"
+            name="Search"
+            className="border rounded-l-full w-96 px-4 py-2"
+            onBlur={() => setShowSearchText(false)}
+            onFocus={() => setShowSearchText(true)}
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
+            placeholder="Search"
+          />
+          <button className="border px-6 bg-gray-50 rounded-r-full">
+            &#x1F50E;&#xFE0E;
+          </button>
+        </div>
+        {showSearchText && (
+          <ul className="shadow-lg rounded-lg mt-1 border w-96 ml-1">
+            {itemList.map((e, index) => {
+              return (
+                <li
+                  className="px-2 py-1 hover:bg-gray-200 hover:cursor-auto"
+                  key={index}
+                >
+                  {" "}
+                  &#x1F50E;&#xFE0E; {e}
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </div>
       <img
-        className="h-10 my-3"
+        className="h-10 my-3 hover:cursor-pointer"
         alt="user"
         src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg"
       />
