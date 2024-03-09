@@ -19,7 +19,7 @@ const Header = () => {
     const timer = setTimeout(() => {
       //searching if searched item is present in the store or not
       if (listItemFromStore[search]) {
-        setItemList([listItemFromStore[search]]);
+        setItemList(listItemFromStore[search]);
       } else {
         getItemFromSearch();
       }
