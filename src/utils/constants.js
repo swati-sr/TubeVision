@@ -1,11 +1,25 @@
-const GOOGLE_AUTH_KEY = "AIzaSyCWrV8nmatIh_c6So94zlmqYjFslxJvGnk";
+export const GOOGLE_AUTH_KEY = "AIzaSyCWrV8nmatIh_c6So94zlmqYjFslxJvGnk";
+
+export const YOUTUBE_URL = "https://www.youtube.com/embed/";
 
 export const GET_YOUTUBE_VIDEO_API =
-  "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=" +
+  "https://corsproxy.org/?" +
+  encodeURIComponent(
+    "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key="
+  ) +
   GOOGLE_AUTH_KEY;
 
 export const SEARCH_LIST_YOUTUBE_API =
-  "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+  "https://corsproxy.org/?" +
+  encodeURIComponent(
+    "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q="
+  );
+
+export const VIDEO_FROM_SEARCHLIST_YOUTUBE_API =
+  "https://corsproxy.org/?" +
+  encodeURIComponent(
+    "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&regionCode=IN&q="
+  );
 
 export const STATIC_COMMENTS = [
   {
