@@ -1,3 +1,5 @@
+import { USER_IMG } from "../utils/helper";
+
 export const CommentList = ({ comments }) => {
   return comments.map((comment) => {
     return (
@@ -18,10 +20,9 @@ const Comment = ({ data }) => {
       <img
         className="h-8 my-2 py-1 px-1 mt-5 rounded-full"
         alt="user"
-        src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg"
+        src={USER_IMG}
       />
       <div className="my-2 py-1 px-1 flex-row">
-        {/* <p>{replies.length} replies</p> */}
         <p>{author}</p>
         <p>{content}</p>
       </div>

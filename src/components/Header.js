@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { openSideMenu } from "../utils/sideMenuSlice";
 import { SEARCH_LIST_YOUTUBE_API } from "../utils/constants";
 import { cachedResults } from "../utils/searchSlice";
+import { USER_IMG } from "../utils/helper";
 
 const Header = () => {
   const [search, setSearch] = useState("");
@@ -103,7 +104,7 @@ const Header = () => {
       <img
         className="h-10 my-3 hover:cursor-pointer"
         alt="user"
-        src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg"
+        src={USER_IMG}
       />
     </div>
   );

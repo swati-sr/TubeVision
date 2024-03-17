@@ -101,3 +101,5 @@ export const STATIC_COMMENTS = [
     ],
   },
 ];
+
+export const CHAT_COUNT = 25;
