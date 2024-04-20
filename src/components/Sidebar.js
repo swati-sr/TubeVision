@@ -52,7 +52,7 @@ const Sidebar = () => {
     },
   ];
   return !isSideMenuOpen ? null : (
-    <div className="w-40 border shadow-xl h-screen p-2 py-4 px-5">
+    <div className="w-40 border shadow-xl h-screen p-2 py-4 px-5 sticky top-20">
       <ul>
         {topMenu.map((li) => {
           return (

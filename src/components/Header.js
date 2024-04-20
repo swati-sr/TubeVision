@@ -51,7 +51,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex py-2 shadow-lg justify-between px-2">
+    <div className="flex py-2 shadow-lg justify-between px-2 top-0 sticky z-0 bg-white">
       <div className="flex">
         <img
           onClick={() => {
